@@ -12,8 +12,8 @@ terraform {
   required_version = ">= 1.8"
   #### enable remote TF state
   backend "s3" {
-    bucket = "terraform-state-s3-sergei" # please use your bucket name!!!
-    key    = "aws-lambda/tf-state.tfstate"       # Path to the state file in the bucket
+    bucket = "terraform-state-s3-sergei"   # please use your bucket name!!!
+    key    = "aws-lambda/tf-state.tfstate" # Path to the state file in the bucket
     region = "us-east-1"
   }
 }
