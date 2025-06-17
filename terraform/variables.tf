@@ -1,8 +1,10 @@
 variable "lambda_function_name" {
-  default = "terraform-lambda-func"
+  default = "MyLambdaFunction"
 }
 
-variable "region" {
-  default = "us-east-1"
+variable "aws_region" {
+  description = "AWS region"
+  type        = string
+  default     = "us-east-1"
 }
 
