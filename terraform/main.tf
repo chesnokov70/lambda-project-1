@@ -42,6 +42,27 @@ resource "aws_iam_role_policy_attachment" "lambda_basic_execution" {
   policy_arn = "arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
 }
 
+resource "aws_iam_role_policy" "lambda_s3_policy" {
+  name = "lambda_s3_policy"
+  role = aws_iam_role.lambda_exec_role.id
+
+  policy = jsonencode({
+    Version = "2012-10-17",
+    Statement = [{
+      Effect = "Allow",
+      Action = [
+        "s3:PutObject",
+        "s3:GetObject",
+        "s3:ListBucket"
+      ],
+      Resource = [
+        "arn:aws:s3:::terraform-state-s3-sergei",
+        "arn:aws:s3:::terraform-state-s3-sergei/*"
+      ]
+    }]
+  })
+}
+
 resource "aws_lambda_function" "lambda_func" {
   function_name = "MyLambdaFunction"
   role          = aws_iam_role.lambda_exec_role.arn
